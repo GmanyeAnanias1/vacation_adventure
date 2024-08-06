@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Registration extends Model
 {
     use HasFactory;
+    protected $table = 'applicant_details';
+    protected $primaryKey = 'id';
     protected $fillable = [
         'parents_name',
         'wards_name',
@@ -17,6 +19,6 @@ class Registration extends Model
         'phone_number',
         'email',
         'start_date',
-        'end_date'
+        'end_date',
     ];
 }

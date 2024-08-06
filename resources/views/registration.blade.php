@@ -5,42 +5,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vacation Adventure || Registration</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <style>
+    /* Your CSS styles */
     .spinner-border {
-  display: none; /* Hide the spinner initially */
-  position: fixed; /* Fixed position */
-  top: 50%; /* Position from the top */
-  left: 50%; /* Position from the left */
-  transform: translate(-80%, -80%); /* Center the spinner */
-  border-width: 20px;
-  border-style: solid;
-  border-color: #343a40;
-  border-top-color: yellow;
-  border-radius: 50%;
-  width: 6rem;
-  height: 8rem;
-  animation: spin 2s linear infinite;
-  z-index: 9999; /* Ensure it's above other elements */
-}
+      display: none; /* Hide the spinner initially */
+      position: fixed; /* Fixed position */
+      top: 50%; /* Position from the top */
+      left: 50%; /* Position from the left */
+      transform: translate(-50%, -50%); /* Center the spinner */
+      border-width: 20px;
+      border-style: solid;
+      border-color: #343a40;
+      border-top-color: yellow;
+      border-radius: 50%;
+      width: 6rem;
+      height: 8rem;
+      animation: spin 2s linear infinite;
+      z-index: 9999; /* Ensure it's above other elements */
+    }
 
-@keyframes spin {
-  0% { transform: translate(-50%, -50%) rotate(0deg); }
-  100% { transform: translate(-50%, -50%) rotate(360deg); }
-}
+    @keyframes spin {
+      0% { transform: translate(-50%, -50%) rotate(0deg); }
+      100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
     .form-container {
       display: flex;
       align-items: stretch;
     }
     .form-image {
-      width: 100%;
-      height: 100%;
+      width: 460px;
+      height: 1000px;
       object-fit: cover;
     }
     .form-wrapper {
       background-color: white;
       padding: 20px;
       border-radius: 5px;
-      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     }
     .form-group input {
       width: 100%;
@@ -50,9 +52,9 @@
     .form-group label {
       font-weight: bold;
     }
-     .form-group input:hover{
-     outline:red;
-     }
+    .form-group input:hover {
+      outline: red;
+    }
   </style>
 </head>
 <body>
@@ -61,12 +63,11 @@
       <div class="col-md-10">
         <div class="row form-container">
           <div class="col-md-6">
-            <img src="{{ asset('images/kidcancode.jpg') }}" alt="Vacation Adventure" class="form-image">
+            <img src="{{ asset('images/form.jpg') }}" alt="Vacation Adventure" class="form-image">
           </div>
           <div class="form-wrapper col-md-6">
-            <form id="registrationForm" action="{{ route('register.submit') }}" method="POST">
-              @csrf
-
+            <form id="registrationForm">
+                @csrf
               <h4 class="my-4 text-center text-danger">Vacation Adventure Registration Form</h4>
               <div class="form-group">
                 <label for="parentsName">Parent's Name</label>
@@ -98,14 +99,14 @@
               </div>
               <div class="form-group">
                 <label for="startDate">Start Date</label>
-                <input type="date" class="form-control" id="startDate" value="2024-08-13" readonly>
+                <input type="date" class="form-control" id="startDate" name="start_date" value="2024-08-13" readonly>
               </div>
               <div class="form-group">
                 <label for="endDate">End Date</label>
-                <input type="date" class="form-control" id="endDate" value="2024-08-30" readonly>
+                <input type="date" class="form-control" id="endDate" name="end_date" value="2024-08-30" readonly>
               </div>
-              <div class="text-center ">
-                <button type="submit" class="btn btn-warning w-100 fw-500 ">Submit</button>
+              <div class="text-center">
+                <button type="submit" class="btn btn-warning w-100 fw-500">Submit</button>
                 <div class="spinner-border text-warning ml-3" role="status">
                   <span class="sr-only">Submitting...</span>
                 </div>
@@ -122,16 +123,46 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script>
     $(document).ready(function() {
-      $('#registrationForm').on('submit', function(event) {
-        // Prevent the form from submitting normally
-        event.preventDefault();
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
 
-        // Show the spinner and disable the form fields
+      $('#registrationForm').on('submit', function(e) {
+        e.preventDefault();
         $('.spinner-border').show();
         $('#registrationForm :input').prop('disabled', true);
 
-        // Submit the form
-        this.submit();
+        var formData = {
+          parents_name: $('#parentsName').val(),
+          wards_name: $('#wardsName').val(),
+          ward_age: $('#wardAge').val(),
+          ward_school: $('#wardSchool').val(),
+          location: $('#location').val(),
+          phone_number: $('#phoneNumber').val(),
+          email: $('#email').val(),
+          start_date: $('#startDate').val(),
+          end_date: $('#endDate').val()
+        };
+
+        $.ajax({
+          url: '/api/register',
+          type: 'POST',
+          data: JSON.stringify(formData),
+          contentType: 'application/json',
+          success: function(response) {
+            alert('Registration successful!');
+            $('.spinner-border').hide();
+            $('#registrationForm :input').prop('disabled', false);
+            $('#registrationForm')[0].reset();
+          },
+          error: function(xhr) {
+            alert('Registration failed: ' + xhr.responseText);
+            $('.spinner-border').hide();
+            $('#registrationForm :input').prop('disabled', false);
+          }
+        });
       });
     });
   </script>

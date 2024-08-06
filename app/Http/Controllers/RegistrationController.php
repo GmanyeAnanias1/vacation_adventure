@@ -3,25 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Registration;
 
 class RegistrationController extends Controller
 {
     public function submit(Request $request)
     {
         // Validate the incoming request data
-        $request->validate([
-            'parents_name' => 'required|string|max: 50',
-            'wards_name' => 'required|string|max:05',
-            'ward_age' => 'required|integer|min:1',
-            'ward_school' => 'required|string|max:70',
-            'location' => 'required|string|max:70 ',
+        $validatedData = $request->validate([
+            'parents_name' => 'required|string|max:50',
+            'wards_name' => 'required|string|max:50',
+            'ward_age' => 'required|integer|min:1|max:10',
+            'ward_school' => 'required|string|max:100',
+            'location' => 'required|string|max:100',
             'phone_number' => 'required|string|max:10',
-            'email' => 'required|email|max:70',
+            'email' => 'required|string|email|max:50',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
         ]);
 
-        // Process the data (e.g., save to the database, send an email, etc.)
+        Registration::create($validatedData);
 
-        // Redirect or return a response
-        return back()->with('success', 'Registration completed successfully!');
+        return response()->json(['message' => 'Registration successful', 'ok' => true], 200);
     }
 }
