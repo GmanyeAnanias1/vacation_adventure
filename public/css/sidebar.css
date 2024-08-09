@@ -1,0 +1,31 @@
+
+    .sidebar {
+      height: 100vh;
+      width: 210px;
+      position: fixed;
+      top: -4rem;
+      padding-top: 12rem;
+
+  }
+
+  .sidebar a {
+      display: block;
+      color: white;
+      padding: 15px;
+      text-decoration: none;
+      font-size: 1.1em;
+
+  }
+  .sidebar a:hover {
+display: flex;
+align-items: center;
+justify-content: center;
+background-color: #545657;
+color: white;
+width: 10rem;
+font-size: 12px;
+border-radius: 1rem;
+transition: background-color 0.5s ease-in-out;
+margin-left: 10px;
+}
+
