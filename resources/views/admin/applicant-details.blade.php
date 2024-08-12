@@ -24,45 +24,45 @@
         <table class="table table-bordered table-striped">
             <thead>
                 <tr class="text-center badge-dark">
-                    <th>Field</th>
-                    <th>Details</th>
+                    <th>FIELD</th>
+                    <th>DETAILS</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <th>Parent's Name</th>
+                    <th>Parent's Name:</th>
                     <td>{{ $registration->parents_name }}</td>
                 </tr>
                 <tr>
-                    <th>Ward's Name</th>
+                    <th>Ward's Name:</th>
                     <td>{{ $registration->wards_name }}</td>
                 </tr>
                 <tr>
-                    <th>Ward's Age</th>
+                    <th>Ward's Age:</th>
                     <td>{{ $registration->ward_age }}</td>
                 </tr>
                 <tr>
-                    <th>Ward's School</th>
+                    <th>Ward's School:</th>
                     <td>{{ $registration->ward_school }}</td>
                 </tr>
                 <tr>
-                    <th>Location</th>
+                    <th>Location:</th>
                     <td>{{ $registration->location }}</td>
                 </tr>
                 <tr>
-                    <th>Phone Number</th>
+                    <th>Phone Number:</th>
                     <td>{{ $registration->phone_number }}</td>
                 </tr>
                 <tr>
-                    <th>Email</th>
+                    <th>Email:</th>
                     <td>{{ $registration->email }}</td>
                 </tr>
                 <tr>
-                    <th>Start Date</th>
+                    <th>Start Date:</th>
                     <td>{{ $registration->start_date }}</td>
                 </tr>
                 <tr>
-                    <th>End Date</th>
+                    <th>End Date:</th>
                     <td>{{ $registration->end_date }}</td>
                 </tr>
             </tbody>

@@ -152,7 +152,7 @@
           data: JSON.stringify(formData),
           contentType: 'application/json',
           success: function(response) {
-            alert('Registration successful!');
+            alert('Registration successful! Click on Ok to close the menu');
             $('.spinner-border').hide();
             $('#registrationForm :input').prop('disabled', false);
             $('#registrationForm')[0].reset();

@@ -19,4 +19,5 @@ Route::get('/',  function () {
     return view('registration');
 });
 Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+Route::get('/admin/cardGraph', [AdminDashboardController::class, 'card'])->name('admin.cardGraph');
 Route::get('/admin/applicant-details/{id}', [AdminDashboardController::class, 'show'])->name('admin.applicants.show');

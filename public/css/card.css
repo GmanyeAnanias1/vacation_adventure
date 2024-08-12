@@ -1,0 +1,60 @@
+/* Custom Card Styling */
+.custom-card {
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 20%;
+    height: 20%;
+    margin-left: 30rem;
+}
+
+.custom-card-header {
+    background-color: #007bff;
+    border-radius: 15px 15px 0 0;
+    color: #fff;
+    text-align: center;
+    padding: 15px;
+    font-size: 1.25rem;
+}
+
+.custom-card-body {
+    text-align: center;
+    padding: 20px;
+}
+
+.custom-card-title {
+    font-size: 3rem;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+.custom-card-text {
+    color: #6c757d;
+}
+
+/* Custom Chart Styling */
+.custom-chart-container {
+    padding: 20px;
+    border-radius: 15px;
+    background-color: #f8f9fa;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.custom-chart-header {
+    background-color: #007bff;
+    border-radius: 15px 15px 0 0;
+    color: #fff;
+    text-align: center;
+    padding: 15px;
+    font-size: 1.25rem;
+}
+
+#registrationChart {
+    height: 400px;
+}
+
+/* Additional Styling */
+.container-bg {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 15px;
+}
