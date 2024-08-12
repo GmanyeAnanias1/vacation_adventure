@@ -6,16 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+    .box-shadow {
+        box-shadow: 0 4px 8px rgba(255, 0, 34, 0.5); 
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+    }
+</style>
 </head>
 <body>
     
 
-<div class="container d-flex justify-content-center ">
+<div class="container d-flex justify-content-center box-shadow">
     <div class="col-md-8">
-        <h2 class="text-center mb-4 text-danger mt-4">Applicant Details</h2>
+        <h2 class="text-center mb-4 text-danger mt-4">Applicant Full Details</h2>
         <table class="table table-bordered table-striped">
             <thead>
-                <tr class="text-center">
+                <tr class="text-center badge-dark">
                     <th>Field</th>
                     <th>Details</th>
                 </tr>
@@ -60,7 +68,7 @@
             </tbody>
         </table>
         <div class="text-center mt-4">
-            <a href="{{ route('admin.dashboard') }}" class="btn btn-danger">Back to Dashboard</a>
+            <a href="{{ route('admin.dashboard') }}" class="btn btn-danger sm mb-4">Back to Dashboard</a>
         </div>
     </div>
 </div>
