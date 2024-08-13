@@ -53,7 +53,7 @@
                 
                 <tr>
                     <th>Course:</th>
-                    {{-- <td>{{ $course->course_name }}</td> --}}
+                    <td>{{ $registration->course_name }}</td>
                 </tr>
                 <tr>
                     <th>Phone Number:</th>

@@ -90,16 +90,17 @@
               <h4 class="my-4 text-center text-danger">Vacation Adventure Registration Form</h4>
               <div class="form-group">
                 <div class="form-group">
-                  
+
                   <label for="course">Choose a course:</label>
-                  <select name="course_id" id="course" class="form-control" required>
-                      <option value="" disabled selected>Select a course</option>
-                      @foreach($courses as $course)
-                          <option value="{{ $course->id }}">{{ $course->course_name }}</option>
-                      @endforeach
+                  <select name="course_name" id="course" class="form-control" required>
+                    <option value="" disabled selected>Select a course</option>
+                    @foreach($courses as $course)
+                    <option value="{{ $course->course_name }}">{{ $course->course_name }}</option>
+                    @endforeach
                   </select>
-              </div>
-              
+
+                </div>
+
 
               </div>
               <div class="form-group">
