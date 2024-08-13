@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('ward_age');
             $table->string('ward_school');
             $table->string('location');
+            $table->string('course_name');
             $table->string('phone_number');
             $table->string('email');
             $table->date('start_date')->default('2024-08-13');

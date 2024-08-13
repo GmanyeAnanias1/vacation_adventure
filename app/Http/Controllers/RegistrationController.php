@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Course;
 use App\Models\Registration;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 class RegistrationController extends Controller
 {
@@ -16,6 +18,7 @@ class RegistrationController extends Controller
             'ward_age' => 'required|integer|min:1|max:10',
             'ward_school' => 'required|string|max:100',
             'location' => 'required|string|max:100',
+            'course_name' => 'required',
             'phone_number' => 'required|string|max:10',
             'email' => 'required|string|email|max:50',
             'start_date' => 'required|date',
@@ -26,4 +29,6 @@ class RegistrationController extends Controller
 
         return response()->json(['message' => 'Registration successful', 'ok' => true], 200);
     }
+    
+   
 }

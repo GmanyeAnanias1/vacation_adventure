@@ -29,6 +29,7 @@
                 </tr>
             </thead>
             <tbody>
+                
                 <tr>
                     <th>Parent's Name:</th>
                     <td>{{ $registration->parents_name }}</td>
@@ -48,6 +49,11 @@
                 <tr>
                     <th>Location:</th>
                     <td>{{ $registration->location }}</td>
+                </tr>
+                
+                <tr>
+                    <th>Course:</th>
+                    {{-- <td>{{ $course->course_name }}</td> --}}
                 </tr>
                 <tr>
                     <th>Phone Number:</th>

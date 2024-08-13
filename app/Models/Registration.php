@@ -11,6 +11,7 @@ class Registration extends Model
     protected $table = 'applicant_details';
     protected $primaryKey = 'id';
     protected $fillable = [
+        'course_name',
         'parents_name',
         'wards_name',
         'ward_age',
