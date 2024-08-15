@@ -72,9 +72,10 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
         $(document).ready(function() {
-            // Set up the CSRF token in the AJAX request header
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -84,18 +85,28 @@
             $('#registrationForm').on('submit', function(e) {
                 e.preventDefault();
                 $('.spinner-border').show();
-                $(this).find(':input').prop('disabled', true);
+                $('#registrationForm :input').prop('disabled', true);
+
+                var formData = {
+                    name: $('#name').val(),
+                    email: $('#email').val(),
+                    password: $('#password').val(),
+                    password_confirmation: $('#password_confirmation').val(),
+                };
+
+                console.log("Submitting form data:", formData); // Debugging information
 
                 $.ajax({
-                    url: "{{ route('register') }}",
+                    url: '/api/userRegister', 
                     type: 'POST',
-                    data: $(this).serialize(),
+                    data: formData,
                     success: function(response) {
                         alert('Registration successful! Redirecting to login...');
                         window.location.href = "{{ route('login') }}";
                     },
                     error: function(xhr) {
                         alert('Registration failed: ' + xhr.responseText);
+                        console.error('Error response:', xhr.responseText);
                     },
                     complete: function() {
                         $('.spinner-border').hide();

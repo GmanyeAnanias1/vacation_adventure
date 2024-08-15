@@ -13,7 +13,7 @@ class AuthController extends Controller
         return view('registerLogin.userRegistrationForm');
     }
 
-    public function register(Request $request)
+    public function userRegister(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
@@ -35,24 +35,30 @@ class AuthController extends Controller
         return view('registerLogin.login');
     }
 
+    
+    
     public function login(Request $request)
-    {
-        $credentials = $request->validate([
-            'email' => 'required|string|email',
-            'password' => 'required|string',
-        ]);
+{
+    $credentials = $request->validate([
+        'email' => 'required|string|email',
+        'password' => 'required|string',
+    ]);
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
+    if (Auth::attempt($credentials)) {
+        // Generate a new token for the authenticated user
+        $user = Auth::user();
+        $token = $user->createToken('API Token')->plainTextToken;
 
-            return redirect()->intended('dashboard');
-        }
-
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+        return response()->json([
+            'token' => $token,
+            'user' => $user,
         ]);
     }
 
+    return response()->json([
+        'error' => 'The provided credentials do not match our records.',
+    ], 401);
+}
     public function logout(Request $request)
     {
         Auth::logout();
@@ -60,6 +66,35 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/'); 
-    }    
+        return redirect('/');
+    }
+    
+    
+    
+    
+    public function changePassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|string|min:8|confirmed',
+        ]);
+
+        $user = Auth::user();
+
+        // Check if current password matches
+        if (!Hash::check($request->current_password, $user->password)) {
+            return back()->withErrors(['current_password' => 'Current password is incorrect.']);
+        }
+
+        // Update password
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+
+        return back()->with('status', 'Password successfully changed.');
+    }
+    public function changePasswordForm()
+    {
+        return view('admin.changePassword');
+    }
+
 }
