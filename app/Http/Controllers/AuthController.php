@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
+
 class AuthController extends Controller
 {
     public function userRegistrationForm()
@@ -35,8 +37,8 @@ class AuthController extends Controller
         return view('registerLogin.login');
     }
 
-    
-    
+
+
     public function login(Request $request)
 {
     $credentials = $request->validate([
@@ -68,33 +70,56 @@ class AuthController extends Controller
 
         return redirect('/');
     }
-    
-    
-    
-    
-    public function changePassword(Request $request)
+
+
+
+
+    public function changePasswordForm(Request $request)
     {
-        $request->validate([
-            'current_password' => 'required',
-            'new_password' => 'required|string|min:8|confirmed',
-        ]);
 
-        $user = Auth::user();
-
-        // Check if current password matches
-        if (!Hash::check($request->current_password, $user->password)) {
-            return back()->withErrors(['current_password' => 'Current password is incorrect.']);
+            return view('admin.changePassword');
         }
 
-        // Update password
-        $user->password = Hash::make($request->new_password);
-        $user->save();
+        public function changePassword(Request $request)
+        {
+            $request->validate([
+                'current_password' => 'required',
+                'new_password' => 'required|string|min:8|confirmed',
+            ],
+            [
+                'current_password.required' => 'The current password is required.',
+                'new_password.required' => 'The new password is required.',
+                'new_password.min' => 'The new password must be at least 8 characters.',
+                'new_password.confirmed' => 'The new password confirmation does not match.',
+            ]);
 
-        return back()->with('status', 'Password successfully changed.');
-    }
-    public function changePasswordForm()
-    {
-        return view('admin.changePassword');
-    }
+            $user = Auth::user();
+
+            if (!Hash::check($request->current_password, $user->password)) {
+                return response()->json(['errors' => ['current_password' => ['Current password is incorrect.']]], 422);
+            }
+
+            $user->password = Hash::make($request->new_password);
+            $user->save();
+
+            return response()->json(['message' => 'Password changed successfully.'], 200);
+        }
+
+
+        public function ResetPasswordForm()
+        {
+            return view('admin.resetPasswordForm');
+        }
+
+        public function resetPassword(Request $request)
+        {
+            $request->validate(['email' => 'required|email']);
+
+            $status = Password::sendResetLink($request->only('email'));
+
+            return $status === Password::RESET_LINK_SENT
+                ? back()->with(['status' => __($status)])
+                : back()->withErrors(['email' => __($status)]);
+        }
 
 }

@@ -21,3 +21,4 @@ use App\Http\Controllers\AdminDashboardController;
 // });
 Route::post('/userRegister', [AuthController::class, 'userRegister']);
 Route::get('/admin/changePassword', [AuthController::class, 'changePasswordForm'])->name('password.change');
+Route::get('/resetPasswordForm', [AuthController::class, 'ResetPasswordForm'])->name('password.change');

@@ -36,5 +36,6 @@ Route::get('/admin/cardGraph', [AdminDashboardController::class, 'card'])->name(
 Route::get('/admin/applicant-details/{id}', [AdminDashboardController::class, 'show'])->name('admin.applicants.show');
 Route::get('/addCourse', [CourseController::class,'addCourse'])->name('admin.addCourse');
 Route::post('/addCourse', [CourseController::class,'storeCourse'])->name('storeCourse');
-
+Route::post('/changePassword', [AuthController::class, 'changePassword'])->name('password.change');
+Route::post('/resetPassword', [AuthController::class, 'resetPassword'])->name('resetpassword');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

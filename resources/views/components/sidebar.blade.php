@@ -34,7 +34,7 @@
         </div>
         <a href="/admin/cardGraph"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
         <a href="/admin/dashboard"><i class="fas fa-users"></i> View All Applicants</a>
-        <a href="/"><i class="fas fa-user-plus"></i> Add Applicant</a>
+        <a href="/form"><i class="fas fa-user-plus"></i> Add Applicant</a>
         <a href="admin/addCourse"><i class="fas fa-book-open"></i> Add Course</a>
         <a href="/admin/changePassword"><i class="fas fa-key"></i> Change Password</a>
         <a href="/login"><i class="fas fa-sign-out-alt"></i> Logout</a>

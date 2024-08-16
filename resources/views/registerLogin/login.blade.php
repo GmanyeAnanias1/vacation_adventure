@@ -32,7 +32,7 @@
                     <input type="password" class="form-control" id="password" name="password" required>
                 </div>
                 <button type="submit" class="btn btn-warning btn-block">Login</button>
-                <p class="text-center mt-3">Don't have an account? <a href="{{ route('register') }}" class="btn btn-danger">Register Here</a></p>
+                <p class="text-center mt-3">Fogot Password? <a href="{{ route('password.change') }}" class="btn btn-danger">Reset Password</a></p>
             </form>
         </div>
     </div>
