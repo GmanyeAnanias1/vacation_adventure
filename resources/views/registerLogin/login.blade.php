@@ -32,7 +32,7 @@
                     <input type="password" class="form-control" id="password" name="password" required>
                 </div>
                 <button type="submit" class="btn btn-warning btn-block">Login</button>
-                <p class="text-center mt-3">Fogot Password? <a href="{{ route('password.change') }}" class="btn btn-danger">Reset Password</a></p>
+                <p class="text-center mt-3">Fogot Password? <a href="{{ route('password.reset') }}" class="btn btn-danger">Reset Password</a></p>
             </form>
         </div>
     </div>
@@ -66,7 +66,7 @@
                     data: formData,
                     success: function(response) {
                         alert('Login successful! Redirecting to Admin Dashboard...');
-                        window.location.href = "/api/main-dashboard"; // Correct URL for redirection
+                        window.location.href = "/main-dashboard"; // Correct URL for redirection
                     },
                     error: function(xhr) {
                         alert('Login failed: ' + xhr.responseText);

@@ -36,7 +36,6 @@
         <a href="main-dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
         <a href="/admin/dashboard"><i class="fas fa-users"></i> View All Applicants</a>
         <a href="/form"><i class="fas fa-user-plus"></i> Add Applicant</a>
-        <a href="admin/addCourse"><i class="fas fa-book-open"></i> Add Course</a>
         <a href="/courses"><i class="fas fa-book-open"></i> View Course</a>
         <a href="/changePasswordForm"><i class="fas fa-key"></i> Change Password</a>
         <a href="/api/"><i class="fas fa-sign-out-alt"></i> Logout</a>

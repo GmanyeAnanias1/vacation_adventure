@@ -20,7 +20,8 @@ Route::view('/test',"register");
 Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
 
 Route::delete('/courses/{id}', [CourseController::class, 'destroy'])->name('courses.destroy');
-// Route::redirect('/','/api/main-dashboad');
+// Route::redirect('/','/api/main-dashboard');
+Route::put('/courses/{id}',[CourseController::class, 'editCourse']);
 Route::get('/', [AuthController::class, 'LoginForm']);
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/register', [AuthController::class, 'userRegistrationForm'])->name('register');
