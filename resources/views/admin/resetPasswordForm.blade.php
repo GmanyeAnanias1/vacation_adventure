@@ -46,40 +46,46 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('#resetPasswordForm').on('submit', function(event) {
-                event.preventDefault();
+       $(document).ready(function() {
+    $('#resetPasswordForm').on('submit', function(event) {
+        event.preventDefault();
 
-                $.ajax({
-                    url: '/api/resetPassword',
-                    method: 'POST',
-                    data: $(this).serialize(),
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    success: function(response) {
-                        $('#success-message').text(response.message || 'Password reset link sent to your email!').show();
-                        $('#error-message').hide();
-                        $('#resetPasswordForm')[0].reset();
-                    },
-                    error: function(xhr) {
-                        let errors = xhr.responseJSON.errors;
-                        let errorMessage = '';
+        $.ajax({
+            url: '/api/resetPassword',
+            method: 'POST',
+            data: $(this).serialize(),
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+                $('#success-message').text(response.message || 'Password reset link sent to your email!').show();
+                $('#error-message').hide();
+                $('#resetPasswordForm')[0].reset();
 
-                        if (errors) {
-                            $.each(errors, function(key, value) {
-                                errorMessage += value[0] + '<br>';
-                            });
-                        } else {
-                            errorMessage = 'An error occurred while sending the password reset link.';
-                        }
+                // Redirect to login page after 1 seconds
+                setTimeout(function() {
+                    window.location.href = '/api/';
+                }, 1000);
+            },
+            error: function(xhr) {
+                let errors = xhr.responseJSON.errors;
+                let errorMessage = '';
 
-                        $('#error-message').html(errorMessage).show();
-                        $('#success-message').hide();
-                    }
-                });
-            });
+                if (errors) {
+                    $.each(errors, function(key, value) {
+                        errorMessage += value[0] + '<br>';
+                    });
+                } else {
+                    errorMessage = 'An error occurred while sending the password reset link.';
+                }
+
+                $('#error-message').html(errorMessage).show();
+                $('#success-message').hide();
+            }
         });
+    });
+});
+
     </script>
 </body>
 </html>

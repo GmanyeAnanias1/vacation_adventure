@@ -66,7 +66,7 @@
                     data: formData,
                     success: function(response) {
                         alert('Login successful! Redirecting to Admin Dashboard...');
-                        window.location.href = "/api/admin/dashboard"; // Correct URL for redirection
+                        window.location.href = "/api/main-dashboard"; // Correct URL for redirection
                     },
                     error: function(xhr) {
                         alert('Login failed: ' + xhr.responseText);

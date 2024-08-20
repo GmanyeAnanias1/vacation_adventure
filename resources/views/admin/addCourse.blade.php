@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Include SweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <style>
         .form-container {
             max-width: 500px;
@@ -47,9 +49,15 @@
                     type: 'POST',
                     data: formData,
                     success: function(response) {
-                        alert('Course added successfully! Generated course code: ' + response.course_code);
-                        $('#addCourseForm')[0].reset();
-                    },
+                                Swal.fire(
+                                    'Submitted!',
+                                    'Course added successfully.',
+                                    'success'
+                                ).then(() => {
+                                    $('#addCourseFormForm').trigger(
+                                        'reset');
+                                });
+                            },
                     error: function(xhr) {
                         alert('Error adding course: ' + xhr.responseText);
                     }

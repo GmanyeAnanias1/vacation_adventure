@@ -15,6 +15,7 @@
             margin: 20px auto;
             display: block;
             object-fit: cover;
+           margin-top: 3rem;
         }
         .sidebar .profile {
             text-align: center;
@@ -32,12 +33,13 @@
             <h3 class="text-gray ml-4">{{ Auth::user()->name ?? 'GPA ADMIN' }}</h3>
             <h4>Online...</h4>
         </div>
-        <a href="/admin/cardGraph"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+        <a href="main-dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
         <a href="/admin/dashboard"><i class="fas fa-users"></i> View All Applicants</a>
         <a href="/form"><i class="fas fa-user-plus"></i> Add Applicant</a>
         <a href="admin/addCourse"><i class="fas fa-book-open"></i> Add Course</a>
-        <a href="/admin/changePassword"><i class="fas fa-key"></i> Change Password</a>
-        <a href="/login"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        <a href="/courses"><i class="fas fa-book-open"></i> View Course</a>
+        <a href="/changePasswordForm"><i class="fas fa-key"></i> Change Password</a>
+        <a href="/api/"><i class="fas fa-sign-out-alt"></i> Logout</a>
     </div>
 </body>
 </html>

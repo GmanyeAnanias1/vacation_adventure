@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Validator;
 use Illuminate\Support\Facades\Password;
 
 class AuthController extends Controller
@@ -75,38 +76,33 @@ class AuthController extends Controller
 
 
     public function changePasswordForm(Request $request)
-    {
+        {
 
             return view('admin.changePassword');
         }
 
         public function changePassword(Request $request)
         {
-            $request->validate([
-                'current_password' => 'required',
-                'new_password' => 'required|string|min:8|confirmed',
-            ],
-            [
-                'current_password.required' => 'The current password is required.',
-                'new_password.required' => 'The new password is required.',
-                'new_password.min' => 'The new password must be at least 8 characters.',
-                'new_password.confirmed' => 'The new password confirmation does not match.',
-            ]);
-
-            $user = Auth::user();
-
-            if (!Hash::check($request->current_password, $user->password)) {
-                return response()->json(['errors' => ['current_password' => ['Current password is incorrect.']]], 422);
+            try {
+                $user = Auth::user();
+                if (!$user) {
+                    return response()->json(['message' => 'User not authenticated'], 401);
+                }
+        
+                if (!Hash::check($request->current_password, $user->password)) {
+                    return response()->json(['errors' => ['current_password' => ['Current password is incorrect.']]], 422);
+                }
+        
+                // Update the user's password
+                $user->password = Hash::make($request->new_password);
+                $user->save();
+        
+                return response()->json(['message' => 'Password changed successfully.'], 200);
+            } catch (\Exception $e) {
+                return response()->json(['message' => 'An error occurred', 'error' => $e->getMessage()], 500);
             }
-
-            $user->password = Hash::make($request->new_password);
-            $user->save();
-
-            return response()->json(['message' => 'Password changed successfully.'], 200);
         }
-
-
-        public function ResetPasswordForm()
+                public function ResetPasswordForm()
         {
             return view('admin.resetPasswordForm');
         }

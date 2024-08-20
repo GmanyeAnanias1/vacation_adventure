@@ -6,42 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vacation Adventure || Registration</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Include SweetAlert -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <style>
     /* Your CSS styles */
-    .spinner-border {
-      display: none;
-      /* Hide the spinner initially */
-      position: fixed;
-      /* Fixed position */
-      top: 50%;
-      /* Position from the top */
-      left: 50%;
-      /* Position from the left */
-      transform: translate(-50%, -50%);
-      /* Center the spinner */
-      border-width: 20px;
-      border-style: solid;
-      border-color: #343a40;
-      border-top-color: yellow;
-      border-radius: 50%;
-      width: 6rem;
-      height: 8rem;
-      animation: spin 2s linear infinite;
-      z-index: 9999;
-      /* Ensure it's above other elements */
-    }
-
-    @keyframes spin {
-      0% {
-        transform: translate(-50%, -50%) rotate(0deg);
-      }
-
-      100% {
-        transform: translate(-50%, -50%) rotate(360deg);
-      }
-    }
-
     .form-container {
       display: flex;
       align-items: stretch;
@@ -90,7 +59,6 @@
               <h4 class="my-4 text-center text-danger">Vacation Adventure Registration Form</h4>
               <div class="form-group">
                 <div class="form-group">
-
                   <label for="course">Choose a course:</label>
                   <select name="course_name" id="course" class="form-control" required>
                     <option value="" disabled selected>Select a course</option>
@@ -98,10 +66,7 @@
                     <option value="{{ $course->course_name }}">{{ $course->course_name }}</option>
                     @endforeach
                   </select>
-
                 </div>
-
-
               </div>
               <div class="form-group">
                 <label for="parentsName">Parent's Name</label>
@@ -147,9 +112,6 @@
               </div>
               <div class="text-center">
                 <button type="submit" class="btn btn-warning w-100 fw-500">Submit</button>
-                <div class="spinner-border text-warning ml-3" role="status">
-                  <span class="sr-only">Submitting...</span>
-                </div>
               </div>
             </form>
           </div>
@@ -171,7 +133,6 @@
 
       $('#registrationForm').on('submit', function(e) {
         e.preventDefault();
-        $('.spinner-border').show();
         $('#registrationForm :input').prop('disabled', true);
 
         var formData = {
@@ -180,8 +141,7 @@
           ward_age: $('#wardAge').val(),
           ward_school: $('#wardSchool').val(),
           location: $('#location').val(),
-          course_name: $('#course').val(), // Include the course selection
-
+          course_name: $('#course').val(),
           phone_number: $('#phoneNumber').val(),
           email: $('#email').val(),
           start_date: $('#startDate').val(),
@@ -194,14 +154,16 @@
           data: JSON.stringify(formData),
           contentType: 'application/json',
           success: function(response) {
-            alert('Registration successful! Click on Ok to close the menu');
-            $('.spinner-border').hide();
-            $('#registrationForm :input').prop('disabled', false);
-            $('#registrationForm')[0].reset();
+            Swal.fire(
+              'Submitted!',
+              'Applicant added successfully.',
+              'success'
+            ).then(() => {
+              $('#registrationForm').trigger('reset');
+            });
           },
           error: function(xhr) {
             alert('Registration failed: ' + xhr.responseText);
-            $('.spinner-border').hide();
             $('#registrationForm :input').prop('disabled', false);
           }
         });

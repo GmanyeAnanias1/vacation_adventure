@@ -52,4 +52,21 @@ class CourseController extends Controller
    return view('admin.addCourse');
    }
 
+   public function index()
+{
+    $courses = Course::all(); // Fetch all courses from the database
+    return view('admin.courses', compact('courses')); // Pass the data to the view
+}
+
+public function destroy($id)
+{
+    $course = Course::find($id);
+    if ($course) {
+        $course->delete();
+        return response()->json(['message' => 'Course deleted successfully']);
+    }
+    return response()->json(['message' => 'Course not found'], 404);
+}
+
+
 }

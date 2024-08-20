@@ -24,18 +24,20 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 
 });
-Route::get('/', [AuthController::class, 'LoginForm'])->name('login');
-Route::post('/register', [RegistrationController::class, 'submit'])->name('register.submit');
 
+// Route::post('/register', [RegistrationController::class, 'submit'])->name('register.submit');
 
-Route::post('/login', [AuthController::class, 'login'])->name('login');
-Route::get('/register', [AuthController::class, 'userRegistrationForm'])->name('register');
-Route::get('/form', [CourseController::class, 'getCoursesForRegistration']);
-Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
-Route::get('/admin/cardGraph', [AdminDashboardController::class, 'card'])->name('admin.cardGraph');
-Route::get('/admin/applicant-details/{id}', [AdminDashboardController::class, 'show'])->name('admin.applicants.show');
-Route::get('/addCourse', [CourseController::class,'addCourse'])->name('admin.addCourse');
-Route::post('/addCourse', [CourseController::class,'storeCourse'])->name('storeCourse');
-Route::post('/changePassword', [AuthController::class, 'changePassword'])->name('password.change');
-Route::post('/resetPassword', [AuthController::class, 'resetPassword'])->name('resetpassword');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+// Route::get('/', [AuthController::class, 'LoginForm']);
+// Route::post('/login', [AuthController::class, 'login'])->name('login');
+// Route::post('/register', [AuthController::class, 'userRegistrationForm'])->name('register');
+// Route::get('/form', [CourseController::class, 'getCoursesForRegistration']);
+// Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+// Route::get('/main-dashboard', [AdminDashboardController::class, 'card'])->name('admin.cardGraph');
+// Route::get('/admin/applicant-details/{id}', [AdminDashboardController::class, 'show'])->name('admin.applicants.show');
+// Route::get('/addCourse', [CourseController::class,'addCourse'])->name('admin.addCourse');
+// Route::post('/addCourse', [CourseController::class,'storeCourse'])->name('storeCourse');
+// Route::post('/changePassword', [AuthController::class, 'changePassword']);
+// Route::get('/changePasswordForm', [AuthController::class, 'changePasswordForm'])->name('password.change');
+// Route::get('/resetPasswordForm', [AuthController::class, 'ResetPasswordForm'])->name('password.reset');
+// Route::post('/resetPassword', [AuthController::class, 'resetPassword'])->name('resetpassword');
+// Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
