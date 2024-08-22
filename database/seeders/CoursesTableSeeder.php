@@ -29,8 +29,7 @@ class CoursesTableSeeder extends Seeder
 
         foreach ($courses as $courseName) {
             // Generate a unique course code
-            $code = "PROG" . strtoupper(bin2hex(random_bytes(5)));
-
+            $code = "PROG" . strtoupper(bin2hex(random_bytes(3)));
             // Insert the course into the database
             DB::table('courses')->insert([
                 'trans_id' => uniqid(),

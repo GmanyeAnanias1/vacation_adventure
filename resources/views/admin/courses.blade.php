@@ -47,6 +47,7 @@
             <table id="coursesTable" class="table table-bordered table-striped table-sm">
                 <thead>
                     <tr>
+                        <th>Course Id</th>
                         <th>Transaction ID</th>
                         <th>Course Code</th>
                         <th>Course Name</th>
@@ -58,6 +59,7 @@
                 <tbody>
                     @foreach($courses as $course)
                         <tr>
+                            <td>{{ $course->course_id }}</td>
                             <td>{{ $course->trans_id }}</td>
                             <td>{{ $course->course_code }}</td>
                             <td>{{ $course->course_name }}</td>
@@ -65,9 +67,10 @@
                             <td>{{ $course->createdate }}</td>
                             <td class="d-flex">
                                 <button type="button" class="btn btn-sm btn-warning edit-course" data-id="{{ $course->id }}" data-course-code="{{ $course->course_code }}" data-course-name="{{ $course->course_name }}">
-                                    Edit
+                                Edit
                                 </button>
-                                <button type="button" class="btn btn-sm btn-danger delete-course ml-2" data-id="{{ $course->id }}">
+
+                                <button type="button" class="btn btn-sm btn-danger delete-course ml-2" data-id="{{ $course->course_id }}">
                                     Delete
                                 </button>
                             </td>
@@ -140,140 +143,6 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
-<script>
-$(document).ready(function() {
-    // Initialize DataTable
-    var table = $('#coursesTable').DataTable({
-        responsive: true,
-        autoWidth: false
-    });
-
-    // Open Add Course Modal
-    $('#openAddModalButton').on('click', function() {
-        $('#addCourseModal').modal('show');
-    });
-
-    // Handle form submission for adding a new course
-    $('#addCourseForm').on('submit', function(e) {
-        e.preventDefault();
-
-        var formData = {
-            course_name: $('#course_name').val(),
-            _token: $('meta[name="csrf-token"]').attr('content')
-        };
-
-        $.ajax({
-            url: '/api/addCourse',
-            type: 'POST',
-            data: formData,
-            success: function(response) {
-                Swal.fire(
-                    'Submitted!',
-                    'Course added successfully.',
-                    'success'
-                ).then(() => {
-                    $('#addCourseForm').trigger('reset');
-                    $('#addCourseModal').modal('hide'); // Hide modal on success
-                    table.ajax.reload(); // Reload DataTable
-                });
-            },
-            error: function(xhr) {
-                Swal.fire(
-                    'Failed!',
-                    'There was an error adding the course.',
-                    'error'
-                );
-            }
-        });
-    });
-
-    // Open Edit Course Modal
-    $(document).on('click', '.edit-course', function() {
-        var courseId = $(this).data('id');
-        var courseCode = $(this).data('course-code');
-        var courseName = $(this).data('course-name');
-
-        $('#edit_course_id').val(courseId);
-        $('#edit_course_code').val(courseCode);
-        $('#edit_course_name').val(courseName);
-
-        $('#editCourseModal').modal('show');
-    });
-
-    // Handle form submission for editing a course
-    $('#editCourseForm').on('submit', function(e) {
-        e.preventDefault();
-
-        var courseId = $('#edit_course_id').val();
-        var formData = {
-            course_code: $('#edit_course_code').val(),
-            course_name: $('#edit_course_name').val(),
-            _token: $('meta[name="csrf-token"]').attr('content')
-        };
-
-        $.ajax({
-            url: '/courses/' + courseId,
-            type: 'PUT',
-            data: formData,
-            success: function(response) {
-                Swal.fire(
-                    'Updated!',
-                    'Course updated successfully.',
-                    'success'
-                ).then(() => {
-                    $('#editCourseModal').modal('hide'); // Hide modal on success
-                    table.ajax.reload(); // Reload DataTable
-                });
-            },
-            error: function(xhr) {
-                Swal.fire(
-                    'Failed!',
-                    'There was an error updating the course.',
-                    'error'
-                );
-            }
-        });
-    });
-
-    // Handle delete button click
-    $(document).on('click', '.delete-course', function() {
-        var courseId = $(this).data('id');
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    url: '/courses/' + courseId,
-                    type: 'DELETE',
-                    data: {
-                        "_token": $('meta[name="csrf-token"]').attr('content')
-                    },
-                    success: function(response) {
-                        Swal.fire(
-                            'Deleted!',
-                            'The course has been deleted.',
-                            'success'
-                        ).then(() => {
-                            table.ajax.reload(); // Reload DataTable
-                        });
-                    },
-                    error: function(xhr) {
-                        Swal.fire(
-                            'Failed!',
-                            'There was an error deleting the course.',
-                            'error'
-                        );
-                    }
-                });
-            }
-        });
-    });
-});
-</script>
-
+<script src="{{ asset('js/script.js') }}"></script>
 </body>
 </html>

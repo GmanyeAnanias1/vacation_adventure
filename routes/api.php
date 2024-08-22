@@ -25,11 +25,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 });
 
-// Route::post('/register', [RegistrationController::class, 'submit'])->name('register.submit');
+Route::post('/applicant-register', [RegistrationController::class, 'submit'])->name('register.submit');
+// Route::delete('/courses/{id}', [CourseController::class, 'destroy'])->name('courses.destroy');
+// Route::put('/courses/{id}',[CourseController::class, 'editCourse']);
+Route::post('/addCourse', [CourseController::class,'storeCourse'])->name('storeCourse');
+Route::delete('/courses/{id}', [CourseController::class, 'destroy'])->name('courses.destroy');
+Route::put('/courses/{id}', [CourseController::class, 'editCourse'])->name('courses.update');
 
 // Route::get('/', [AuthController::class, 'LoginForm']);
-// Route::post('/login', [AuthController::class, 'login'])->name('login');
-// Route::post('/register', [AuthController::class, 'userRegistrationForm'])->name('register');
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/register', [AuthController::class, 'userRegistrationForm'])->name('register');
 // Route::get('/form', [CourseController::class, 'getCoursesForRegistration']);
 // Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
 // Route::get('/main-dashboard', [AdminDashboardController::class, 'card'])->name('admin.cardGraph');

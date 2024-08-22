@@ -58,7 +58,7 @@
                     _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
                 };
 
-                console.log("Submitting form data:", formData); // Debugging information
+                
 
                 $.ajax({
                     url: '/api/login',

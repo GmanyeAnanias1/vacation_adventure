@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use DB;
+
 use App\Models\Course;
 use Illuminate\Http\Request;
 
@@ -43,7 +43,7 @@ class CourseController extends Controller
     private function generateUniqueCourseCode()
     {
         do {
-            $code = strtoupper(substr(uniqid(), -6)); // Generate a 6-character code
+            $code = strtoupper(substr(uniqid(), -10)); // Generate a 6-character code
         } while (Course::where('course_code', $code)->exists());
 
         return $code;
@@ -83,12 +83,15 @@ public function editCourse(Request $request, $id)
 public function destroy($id)
 {
     $course = Course::find($id);
+
     if ($course) {
         $course->delete();
-        return response()->json(['message' => 'Course deleted successfully']);
+        return response()->json(['message' => 'Course deleted successfully.']);
     }
-    return response()->json(['message' => 'Course not found'], 404);
+
+    return response()->json(['message' => 'Course not found.'], 404);
 }
+
 
 
 }

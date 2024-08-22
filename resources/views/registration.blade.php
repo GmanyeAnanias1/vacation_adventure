@@ -149,7 +149,7 @@
         };
 
         $.ajax({
-          url: '/api/register',
+          url: '/api/applicant-register',
           type: 'POST',
           data: JSON.stringify(formData),
           contentType: 'application/json',
