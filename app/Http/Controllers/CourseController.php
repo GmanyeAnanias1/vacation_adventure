@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+
 use App\Models\Course;
 use Illuminate\Http\Request;
 
@@ -62,36 +63,34 @@ class CourseController extends Controller
 // Method to handle course editing
 public function editCourse(Request $request, $id)
 {
-    $request->validate([
+    // Validate the request data
+    $validatedData = $request->validate([
         'course_name' => 'required|string|max:60',
-        'course_code' => 'required|string|max:10|unique:courses,course_code,' . $id, // Allow same course code for the current course
+        'course_code' => 'required|string|max:10|unique:courses,course_code,' . $id . ',id',
     ]);
 
-    $course = Course::find($id);
-    if ($course) {
-        $course->course_name = $request->course_name;
-        $course->course_code = $request->course_code;
-        $course->modifyuser = auth()->user()->name ?? 'admin';
-        $course->modifydate = now();
-        $course->save();
+    // Find the course by its ID
+    $course = Course::findOrFail($id);
 
-        return response()->json(['message' => 'Course updated successfully']);
-    }
-    return response()->json(['message' => 'Course not found'], 404);
+    // Update the course fields
+    $course->course_name = $validatedData['course_name'];
+    $course->course_code = $validatedData['course_code'];
+    $course->modifyuser = auth()->user()->name ?? 'admin';
+    $course->modifydate = now();
+
+    // Save the updated course
+    $course->save();
+
+    // Return a success response
+    return response()->json(['message' => 'Course updated successfully']);
 }
 
 public function destroy($id)
 {
-    $course = Course::find($id);
-
-    if ($course) {
-        $course->delete();
-        return response()->json(['message' => 'Course deleted successfully.']);
-    }
-
-    return response()->json(['message' => 'Course not found.'], 404);
+    $course = Course::findOrFail($id);
+    $course->delete();
+    return response()->json(['message' => 'Course deleted successfully']);
 }
-
 
 
 }

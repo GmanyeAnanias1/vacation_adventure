@@ -59,20 +59,25 @@
                 <tbody>
                     @foreach($courses as $course)
                         <tr>
-                            <td>{{ $course->course_id }}</td>
+                            <td>{{ $course->id }}</td>
                             <td>{{ $course->trans_id }}</td>
                             <td>{{ $course->course_code }}</td>
                             <td>{{ $course->course_name }}</td>
                             <td>{{ $course->createuser }}</td>
                             <td>{{ $course->createdate }}</td>
                             <td class="d-flex">
-                                <button type="button" class="btn btn-sm btn-warning edit-course" data-id="{{ $course->id }}" data-course-code="{{ $course->course_code }}" data-course-name="{{ $course->course_name }}">
-                                Edit
-                                </button>
+                                <button type="button" class="btn btn-sm btn-warning edit-course"
+                                data-id="{{ $course->id }}"
+                                data-course-code="{{ $course->course_code }}"
+                                data-course-name="{{ $course->course_name }}">
+                            Edit
+                        </button>
 
-                                <button type="button" class="btn btn-sm btn-danger delete-course ml-2" data-id="{{ $course->course_id }}">
-                                    Delete
-                                </button>
+                        <button type="button" class="btn btn-sm btn-danger delete-course ml-2"
+                                data-id="{{ $course->id }}">
+                            Delete
+                        </button>
+
                             </td>
                         </tr>
                     @endforeach
@@ -116,7 +121,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title text-secondary" id="addCourseModalLabel">Add New Course</h5>
+                <h5 class="modal-title text-danger" id="addCourseModalLabel">Add New Course</h5>
                 <button type="button " class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -128,6 +133,10 @@
                         <label for="course_name">Course Name</label>
                         <input type="text" class="form-control" id="course_name" name="course_name" required>
                     </div>
+                    {{-- <div class="form-group">
+                        <label for="course_code">Course Code</label>
+                        <input type="text" class="form-control" id="course_code" name="course_code" required>
+                    </div> --}}
                     <button type="submit" class="btn btn-warning btn-block">Add Course</button>
                 </form>
             </div>

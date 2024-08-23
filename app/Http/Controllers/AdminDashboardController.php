@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Registration;
 use Carbon\Carbon;
+use App\Models\Course;
+use App\Models\Registration;
 
 
 class AdminDashboardController extends Controller
@@ -17,7 +18,7 @@ class AdminDashboardController extends Controller
 
     public function card(){
         $registrations = Registration::all();
-
+        $courses = Course::all();
         // Group registrations by month
         $registrationsByMonth = $registrations->groupBy(function($date) {
             return \Carbon\Carbon::parse($date->start_date)->format('F'); // Group by month name
@@ -35,7 +36,7 @@ class AdminDashboardController extends Controller
         });
 
         // Return the data to the view
-        return view('admin.cardGraph', compact('registrations','registrationsByMonth'));
+        return view('admin.cardGraph', compact('registrations','registrationsByMonth','courses'));
     }
 
 

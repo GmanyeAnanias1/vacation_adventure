@@ -30,7 +30,7 @@ Route::post('/applicant-register', [RegistrationController::class, 'submit'])->n
 // Route::put('/courses/{id}',[CourseController::class, 'editCourse']);
 Route::post('/addCourse', [CourseController::class,'storeCourse'])->name('storeCourse');
 Route::delete('/courses/{id}', [CourseController::class, 'destroy'])->name('courses.destroy');
-Route::put('/courses/{id}', [CourseController::class, 'editCourse'])->name('courses.update');
+Route::put('/courses/{id}', [CourseController::class, 'editCourse'])->name('courses.edit');
 
 // Route::get('/', [AuthController::class, 'LoginForm']);
 Route::post('/login', [AuthController::class, 'login'])->name('login');

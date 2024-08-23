@@ -1,5 +1,3 @@
-
-
 $(document).ready(function() {
     // Set up CSRF token for AJAX requests
     $.ajaxSetup({
@@ -24,7 +22,8 @@ $(document).ready(function() {
         e.preventDefault();
 
         var formData = {
-            course_name: $('#course_name').val()
+            course_name: $('#course_name').val(),
+            course_code: $('#course_code').val()
         };
 
         $.ajax({
@@ -52,57 +51,57 @@ $(document).ready(function() {
         });
     });
 
-    // Open Edit Course Modal
     $(document).on('click', '.edit-course', function() {
-        var courseId = $(this).data('id');
+        // Retrieve course data from the button's data attributes
+        var courseId = $(this).data('id'); // Now this is the course ID
         var courseCode = $(this).data('course-code');
         var courseName = $(this).data('course-name');
 
+        // Populate the edit form with the course data
         $('#edit_course_id').val(courseId);
         $('#edit_course_code').val(courseCode);
         $('#edit_course_name').val(courseName);
 
+        // Show the modal for editing
         $('#editCourseModal').modal('show');
     });
 
-    // Handle form submission for editing a course
     $('#editCourseForm').on('submit', function(e) {
-    e.preventDefault();
+        e.preventDefault();
 
-    var courseId = $('#edit_course_id').val();
-    var formData = {
-        course_code: $('#edit_course_code').val(),
-        course_name: $('#edit_course_name').val()
-    };
+        // Get the course ID from the hidden input field
+        var courseId = $('#edit_course_id').val();
 
-    $.ajax({
-        url: 'api/courses/' + courseId, // Replace {id} with courseId
-        type: 'PUT',
-        data: formData,
-        success: function(response) {
-            Swal.fire(
-                'Updated!',
-                'Course updated successfully.',
-                'success'
-            ).then(() => {
-                $('#editCourseModal').modal('hide'); // Hide modal on success
-                table.ajax.reload(); // Reload DataTable
-            });
-        },
-        error: function(xhr) {
-            Swal.fire(
-                'Failed!',
-                'There was an error updating the course.',
-                'error'
-            );
-        }
+        // Gather form data
+        var formData = {
+            course_code: $('#edit_course_code').val(),
+            course_name: $('#edit_course_name').val()
+        };
+
+        $.ajax({
+            url: '/api/courses/' + courseId, // Updated URL to use courseId
+            type: 'PUT',
+            data: formData,
+            success: function(response) {
+                Swal.fire(
+                    'Updated!',
+                    'Course updated successfully.',
+                    'success'
+                ).then(() => {
+                    $('#editCourseModal').modal('hide');
+                    $('#coursesTable').DataTable().ajax.reload();
+                });
+            },
+            error: function(xhr) {
+                // Error handling remains the same
+            }
+        });
     });
-});
 
     // Handle delete button click
     $(document).on('click', '.delete-course', function() {
-        var courseId = $(this).data('id');
-    
+        var courseId = $(this).data('id'); // Now this is the course ID
+
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -112,18 +111,15 @@ $(document).ready(function() {
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                    url: 'api/courses/' + courseId, // Replace {id} with courseId
+                    url: '/api/courses/' + courseId, // Updated URL to use courseId
                     type: 'DELETE',
-                    data: {
-                        "_token": $('meta[name="csrf-token"]').attr('content')
-                    },
                     success: function(response) {
                         Swal.fire(
                             'Deleted!',
                             response.message,
                             'success'
                         ).then(() => {
-                            table.ajax.reload(); // Reload DataTable
+                            table.ajax.reload();
                         });
                     },
                     error: function(xhr) {
@@ -137,6 +133,4 @@ $(document).ready(function() {
             }
         });
     });
-})    
-
-
+});

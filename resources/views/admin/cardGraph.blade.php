@@ -36,7 +36,7 @@
                         Total Courses
                     </div>
                     <div class="card-body custom-card-body">
-                        <h2 class="card-title custom-card-title text-danger">{{ $registrations->count() }}</h2>
+                        <h2 class="card-title custom-card-title text-danger">{{$courses->count() }}</h2>
                         <p class="card-text custom-card-text">Total Number of Courses</p>
                     </div>
                 </div>
