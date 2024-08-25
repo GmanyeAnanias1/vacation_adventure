@@ -8,9 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Registration extends Model
 {
     use HasFactory;
+
     protected $table = 'applicant_details';
     protected $primaryKey = 'id';
     protected $fillable = [
+        'registration_type',
         'course_name',
         'parents_name',
         'wards_name',
@@ -19,7 +21,16 @@ class Registration extends Model
         'location',
         'phone_number',
         'email',
-        'start_date',
-        'end_date',
+        'first_name',
+        'middle_name',
+        'last_name',
+        'school',
+        'program',
+        'profession',
+        'industry',
+    ];
+
+    protected $casts = [
+        'ward_age' => 'integer',
     ];
 }

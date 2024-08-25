@@ -38,7 +38,7 @@
         <a href="/form"><i class="fas fa-user-plus"></i> Add Applicant</a>
         <a href="/courses"><i class="fas fa-book-open"></i> View Course</a>
         <a href="/changePasswordForm"><i class="fas fa-key"></i> Change Password</a>
-        <a href="/api/"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        <a href="/"><i class="fas fa-sign-out-alt"></i> Logout</a>
     </div>
 </body>
 </html>

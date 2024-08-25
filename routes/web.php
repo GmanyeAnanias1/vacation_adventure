@@ -19,10 +19,10 @@ use App\Http\Controllers\AdminDashboardController;
 Route::view('/test',"register");
 Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
 
-// Route::redirect('/','/api/main-dashboard');
+Route::redirect('/','/api/main-dashboard');
 Route::get('/', [AuthController::class, 'LoginForm']);
 // Route::post('/login', [AuthController::class, 'login'])->name('login');
-Route::post('/register', [AuthController::class, 'userRegistrationForm'])->name('register');
+Route::get('/register', [AuthController::class, 'userRegistrationForm'])->name('register');
 Route::get('/form', [CourseController::class, 'getCoursesForRegistration']);
 Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
 Route::get('/main-dashboard', [AdminDashboardController::class, 'card'])->name('admin.cardGraph');
@@ -32,9 +32,8 @@ Route::get('/addCourse', [CourseController::class,'addCourse'])->name('admin.add
 Route::post('/changePassword', [AuthController::class, 'changePassword']);
 Route::get('/changePasswordForm', [AuthController::class, 'changePasswordForm'])->name('password.change');
 Route::get('/resetPasswordForm', [AuthController::class, 'ResetPasswordForm'])->name('password.reset');
-Route::post('/resetPassword', [AuthController::class, 'resetPassword'])->name('resetpassword');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
-
+//Register A User Route
 Route::post('/userRegister', [AuthController::class, 'userRegister']);

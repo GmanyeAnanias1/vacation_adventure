@@ -51,7 +51,7 @@
         event.preventDefault();
 
         $.ajax({
-            url: '/api/resetPassword',
+            url: 'api/resetPassword',
             method: 'POST',
             data: $(this).serialize(),
             headers: {
@@ -64,7 +64,7 @@
 
                 // Redirect to login page after 1 seconds
                 setTimeout(function() {
-                    window.location.href = '/api/';
+                    window.location.href = '/';
                 }, 1000);
             },
             error: function(xhr) {

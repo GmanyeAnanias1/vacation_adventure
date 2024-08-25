@@ -13,16 +13,33 @@ return new class extends Migration
     {
         Schema::create('applicant_details', function (Blueprint $table) {
             $table->id();
-            $table->string('parents_name');
-            $table->string('wards_name');
-            $table->integer('ward_age');
-            $table->string('ward_school');
-            $table->string('location');
+            $table->string('registration_type');
             $table->string('course_name');
+
+            // Fields for children registration
+            $table->string('parents_name')->nullable();
+            $table->string('wards_name')->nullable();
+            $table->integer('ward_age')->nullable();
+            $table->string('ward_school')->nullable();
+            $table->string('location')->nullable();
+
+            // Fields for student and adult registration
+            $table->string('first_name')->nullable();
+            $table->string('middle_name')->nullable();
+            $table->string('last_name')->nullable();
+
+            // Common fields
             $table->string('phone_number');
             $table->string('email');
-            $table->date('start_date')->default('2024-08-13');
-            $table->date('end_date')->default('2024-08-30');
+
+            // Additional fields for student registration
+            $table->string('school')->nullable();
+            $table->string('program')->nullable();
+
+            // Additional fields for adult registration
+            $table->string('profession')->nullable();
+            $table->string('industry')->nullable();
+
             $table->timestamps();
         });
     }

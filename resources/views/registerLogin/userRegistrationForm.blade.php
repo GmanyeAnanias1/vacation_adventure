@@ -97,12 +97,12 @@
                 console.log("Submitting form data:", formData); // Debugging information
 
                 $.ajax({
-                    url: '/api/userRegister', 
+                    url: '/api/userRegister',
                     type: 'POST',
                     data: formData,
                     success: function(response) {
                         alert('Registration successful! Redirecting to login...');
-                        window.location.href = "{{ route('login') }}";
+                        window.location.href = "/";
                     },
                     error: function(xhr) {
                         alert('Registration failed: ' + xhr.responseText);
