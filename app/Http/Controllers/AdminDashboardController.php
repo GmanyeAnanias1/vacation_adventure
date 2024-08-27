@@ -9,13 +9,7 @@ use App\Models\Registration;
 
 class AdminDashboardController extends Controller
 {
-    public function index() {
-        $registrations = Registration::all(); // Fetch all registrations from the database
-
-        return view('admin.dashboard', compact('registrations'));
-
-    }
-
+    
     public function card(){
         $registrations = Registration::all();
         $courses = Course::all();

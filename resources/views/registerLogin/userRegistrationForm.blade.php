@@ -97,7 +97,7 @@
                 console.log("Submitting form data:", formData); // Debugging information
 
                 $.ajax({
-                    url: '/api/userRegister',
+                    url: 'api/userRegister',
                     type: 'POST',
                     data: formData,
                     success: function(response) {

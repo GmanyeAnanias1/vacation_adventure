@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
     .box-shadow {
-        box-shadow: 0 4px 8px rgba(255, 0, 34, 0.5); 
+        box-shadow: 0 4px 8px rgba(255, 0, 34, 0.5);
         padding: 20px;
         background-color: #fff;
         border-radius: 8px;
@@ -16,7 +16,7 @@
 </style>
 </head>
 <body>
-    
+
 
 <div class="container d-flex justify-content-center box-shadow">
     <div class="col-md-8">
@@ -29,7 +29,7 @@
                 </tr>
             </thead>
             <tbody>
-                
+
                 <tr>
                     <th>Parent's Name:</th>
                     <td>{{ $registration->parents_name }}</td>
@@ -50,7 +50,7 @@
                     <th>Location:</th>
                     <td>{{ $registration->location }}</td>
                 </tr>
-                
+
                 <tr>
                     <th>Course:</th>
                     <td>{{ $registration->course_name }}</td>
@@ -63,14 +63,7 @@
                     <th>Email:</th>
                     <td>{{ $registration->email }}</td>
                 </tr>
-                <tr>
-                    <th>Start Date:</th>
-                    <td>{{ $registration->start_date }}</td>
-                </tr>
-                <tr>
-                    <th>End Date:</th>
-                    <td>{{ $registration->end_date }}</td>
-                </tr>
+                
             </tbody>
         </table>
         <div class="text-center mt-4">

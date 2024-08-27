@@ -9,6 +9,7 @@ use App\Http\Controllers\RegistrationController;
 
 
 
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -25,7 +26,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 });
 
+
 Route::post('/applicant-register', [RegistrationController::class, 'submit'])->name('register.submit');
+
 
 Route::post('/addCourse', [CourseController::class,'storeCourse'])->name('storeCourse');
 Route::delete('/courses/{id}', [CourseController::class, 'destroy'])->name('courses.destroy');
@@ -33,11 +36,11 @@ Route::put('/courses/{id}', [CourseController::class, 'editCourse'])->name('cour
 
 // Route::get('/', [AuthController::class, 'LoginForm']);
 Route::post('/login', [AuthController::class, 'login'])->name('login');
-Route::post('/userRegister', [AuthController::class, 'userRegistrationForm'])->name('register');
+// Route::post('/userRegister', [AuthController::class, 'userRegister'])->name('register');
 
 
 // Route::post('/changePassword', [AuthController::class, 'changePassword']);
 // Route::get('/changePasswordForm', [AuthController::class, 'changePasswordForm'])->name('password.change');
 // Route::get('/resetPasswordForm', [AuthController::class, 'ResetPasswordForm'])->name('password.reset');
-Route::post('/resetPassword', [AuthController::class, 'resetPassword'])->name('resetpassword');
+// Route::post('/resetPassword', [AuthController::class, 'resetPassword'])->name('resetpassword');
 // Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

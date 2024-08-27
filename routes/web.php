@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\AdminDashboardController;
 
 /*
@@ -16,19 +17,18 @@ use App\Http\Controllers\AdminDashboardController;
 |
 */
 
-Route::view('/test',"register");
+// Route::view('/test',"register");
 Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
 
 Route::redirect('/','/api/main-dashboard');
 Route::get('/', [AuthController::class, 'LoginForm']);
 // Route::post('/login', [AuthController::class, 'login'])->name('login');
-Route::get('/register', [AuthController::class, 'userRegistrationForm'])->name('register');
+// Route::get('/register', [AuthController::class, 'userRegistrationForm'])->name('register');
 Route::get('/form', [CourseController::class, 'getCoursesForRegistration']);
-Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+Route::get('/admin/dashboard', [RegistrationController::class, 'index'])->name('admin.dashboard');
 Route::get('/main-dashboard', [AdminDashboardController::class, 'card'])->name('admin.cardGraph');
 Route::get('/admin/applicant-details/{id}', [AdminDashboardController::class, 'show'])->name('admin.applicants.show');
 Route::get('/addCourse', [CourseController::class,'addCourse'])->name('admin.addCourse');
-// Route::post('/addCourse', [CourseController::class,'storeCourse'])->name('storeCourse');
 Route::post('/changePassword', [AuthController::class, 'changePassword']);
 Route::get('/changePasswordForm', [AuthController::class, 'changePasswordForm'])->name('password.change');
 Route::get('/resetPasswordForm', [AuthController::class, 'ResetPasswordForm'])->name('password.reset');
