@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vacation Adventure || Registration</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="icon" href="{{ asset('favicon_gpa.ico') }}" type="image/x-icon"/>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <style>

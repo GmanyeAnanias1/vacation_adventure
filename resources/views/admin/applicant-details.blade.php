@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="icon" href="{{ asset('favicon_gpa.ico') }}" type="image/x-icon"/>
     <style>
     .box-shadow {
         box-shadow: 0 4px 8px rgba(255, 0, 34, 0.5);
@@ -63,7 +64,7 @@
                     <th>Email:</th>
                     <td>{{ $registration->email }}</td>
                 </tr>
-                
+
             </tbody>
         </table>
         <div class="text-center mt-4">
