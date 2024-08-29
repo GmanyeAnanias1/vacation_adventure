@@ -104,7 +104,7 @@
                                 <th>Phone</th>
                                 <th>School</th>
                                 <th>Program</th>
-                                <th>Actions</th>
+                                {{-- <th>Actions</th> --}}
                             </tr>
                         </thead>
                         <tbody>
@@ -117,9 +117,9 @@
                                 <td>{{ $registration->phone_number }}</td>
                                 <td>{{ $registration->school }}</td>
                                 <td>{{ $registration->program }}</td>
-                                <td>
+                                {{-- <td>
                                     <a href="{{ route('admin.applicants.show', $registration->id) }}" class="btn btn-info btn-sm">View Details</a>
-                                </td>
+                                </td> --}}
                             </tr>
                             @endforeach
                         </tbody>
@@ -138,7 +138,7 @@
                                 <th>Phone</th>
                                 <th>Profession</th>
                                 <th>Industry</th>
-                                <th>Actions</th>
+                                {{-- <th>Actions</th> --}}
                             </tr>
                         </thead>
                         <tbody>
@@ -151,9 +151,9 @@
                                 <td>{{ $registration->phone_number }}</td>
                                 <td>{{ $registration->profession }}</td>
                                 <td>{{ $registration->industry }}</td>
-                                <td>
+                                {{-- <td>
                                     <a href="{{ route('admin.applicants.show', $registration->id) }}" class="btn btn-info btn-sm">View Details</a>
-                                </td>
+                                </td> --}}
                             </tr>
                             @endforeach
                         </tbody>

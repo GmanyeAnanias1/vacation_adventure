@@ -28,8 +28,8 @@ class RegistrationController extends Controller
 
     public function submit(Request $request)
     {
-        // Log incoming request data for debugging
-        Log::info('Incoming registration data:', $request->all());
+        // Log the request data to debug missing fields
+        Log::info('Request data:', $request->all());
 
         // Define common validation rules
         $commonRules = [
@@ -39,17 +39,28 @@ class RegistrationController extends Controller
             'email' => 'required|string|email|max:50',
         ];
 
+        // Get the registration type from the request
+        $registrationType = $request->input('registration_type');
+
+        // Ensure that registration type is provided and valid
+        if (!in_array($registrationType, ['children', 'student', 'adult'])) {
+            return response()->json([
+                'message' => 'Validation failed',
+                'errors' => ['registration_type' => 'Invalid registration type.']
+            ], 422);
+        }
+
         // Define type-specific validation rules
-        $typeSpecificRules = $this->getTypeSpecificRules($request->input('registration_type'));
+        $typeSpecificRules = $this->getTypeSpecificRules($registrationType);
 
         // Merge common and type-specific validation rules
         $rules = array_merge($commonRules, $typeSpecificRules);
 
         try {
-            // Validate request data
+            // Validate the request data
             $validatedData = $request->validate($rules);
 
-            // Create registration record
+            // Create a new registration record in the database
             Registration::create($validatedData);
 
             // Return a successful response
