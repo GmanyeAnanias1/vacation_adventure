@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Log;
+use App\Mail\RegistrationSuccessful;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\ValidationException;
 
 class RegistrationController extends Controller
@@ -61,9 +63,19 @@ class RegistrationController extends Controller
             $validatedData = $request->validate($rules);
 
             // Create a new registration record in the database
-            Registration::create($validatedData);
+            // Registration::create($validatedData);
 
-            // Return a successful response
+           // Create a new registration record in the database
+            $registration = Registration::create($validatedData);
+
+            if (is_null($registration->email)) {
+                throw new \Exception('Registration email is null');
+            }
+
+            Mail::to($registration->email)->send(new RegistrationSuccessful($registration));
+
+
+            // Return a successful responseration));
             return response()->json(['message' => 'Registration successful', 'ok' => true], 200);
         } catch (ValidationException $e) {
             // Log validation errors for debugging

@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="icon" href="{{ asset('favicon_gpa.ico') }}" type="image/x-icon"/>
+    <title>Admin Dashboard</title>
     <style>
     .box-shadow {
         box-shadow: 0 4px 8px rgba(255, 0, 34, 0.5);

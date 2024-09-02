@@ -39,8 +39,8 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 // Route::post('/userRegister', [AuthController::class, 'userRegister'])->name('register');
 
 
-// Route::post('/changePassword', [AuthController::class, 'changePassword']);
+Route::post('/changePassword', [AuthController::class, 'changePassword']);
 // Route::get('/changePasswordForm', [AuthController::class, 'changePasswordForm'])->name('password.change');
 // Route::get('/resetPasswordForm', [AuthController::class, 'ResetPasswordForm'])->name('password.reset');
-// Route::post('/resetPassword', [AuthController::class, 'resetPassword'])->name('resetpassword');
+Route::post('/resetPassword', [AuthController::class, 'resetPassword'])->name('resetpassword');
 // Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
